@@ -1,0 +1,70 @@
+//开启弹性盒
+@mixin flex_box(){
+	display:-webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+//竖向排列cloumn
+@mixin flex_direction(){
+	-webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    -moz-box-orient:vertical;
+    -moz-box-direction:normal;
+    flex-direction:column;
+    -webkit-flex-direction:column;
+}
+
+//轴方向横向排列布局 
+//space-around兼容不好
+@mixin flex_justify_content($pos){
+	@if ($pos==space-between){
+		-webkit-justify-content:space-between;
+		justify-content:space-between;
+		-moz-box-pack:justify;
+		-webkit-moz-box-pack:justify;
+		box-pack:justify;
+	}@else{
+		-webkit-justify-content:$pos;
+		justify-content:$pos;
+		-moz-box-pack:$pos;
+		-webkit-moz-box-pack:$pos;
+		box-pack:$pos;
+	}
+	
+}
+//轴方向竖向排列布局
+@mixin flex_align_items($pos){
+	align-items:$pos;
+	-webkit-align-items:$pos;
+	box-align:$pos;
+	-moz-box-align:$pos;
+	-webkit-box-align:$pos;
+}
+
+//盒子比例兼容
+@mixin flex($num){
+	box-flex:$num;
+	-webkit-box-flex:$num;
+	-moz-box-flex:$num;
+	flex:$num;
+	-webkit-flex:$num;
+}
+
+//元素换行
+@mixin flex_wrap(){
+	-webkit-flex-wrap:wrap;
+    -webkit-box-lines:multiple;
+    -moz-flex-wrap:wrap;
+    flex-wrap:wrap;
+ 
+	-webkit-flex-flow:row wrap;
+    -webkit-box-orient:horizontal;
+    -webkit-box-lines:multiple;
+　　-moz-flex-flow:row wrap;
+    box-orient:horizontal;
+    box-lines:multiple;
+    flex-flow:row wrap;
+}
+
