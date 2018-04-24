@@ -38,7 +38,7 @@
         .v3-box {
             max-width: 400px;
             top: 200px;
-            position: absolute;
+            position: fixed;
             left: 50%;
             transform: translateX(-50%);
             border-radius: 3px;

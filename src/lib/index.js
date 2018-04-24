@@ -11,7 +11,7 @@ const comment = {
         Vue.component (Cell.name, Cell);
         Vue.component (Switch.name, Switch);
         Vue.component (Alert.name, Alert);      
-        Vue.component (Toast.name, Toast);      
+        Vue.component (Toast.name, Toast);
         Vue.$alert = Vue.prototype.$alert = Alert;
         Vue.$toast = Vue.prototype.$toast = Toast;
     }
