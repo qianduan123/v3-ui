@@ -58,44 +58,6 @@
             <input slot="right" type="checkbox" value="D" v-model="checkList"/>            
         </v3-cell-item>
     </div>
-    <div id="a1" style="padding:10px 0;">
-        <v3-cell-item type="checkbox">
-            <img  slot="icon" src="http://static.ydcss.com/ydui/img/logo.png">			  
-            <span slot="left">多选一</span>
-            <input slot="right" type="checkbox" value="A" v-model="checkList"/>            
-        </v3-cell-item>
-        <v3-cell-item type="checkbox">
-            <span slot="left">多选二</span>
-            <input slot="right" type="checkbox" value="B" v-model="checkList"/>            
-        </v3-cell-item>
-        <v3-cell-item type="checkbox">
-            <span slot="left">多选二</span>
-            <input slot="right" type="checkbox" value="C" v-model="checkList"/>            
-        </v3-cell-item>
-        <v3-cell-item type="checkbox">
-            <span slot="left">多选二</span>
-            <input slot="right" type="checkbox" value="D" v-model="checkList"/>            
-        </v3-cell-item>
-    </div>
-    <div id="a1" style="padding:10px 0;">
-        <v3-cell-item type="checkbox">
-            <img  slot="icon" src="http://static.ydcss.com/ydui/img/logo.png">			  
-            <span slot="left">多选一</span>
-            <input slot="right" type="checkbox" value="A" v-model="checkList"/>            
-        </v3-cell-item>
-        <v3-cell-item type="checkbox">
-            <span slot="left">多选二</span>
-            <input slot="right" type="checkbox" value="B" v-model="checkList"/>            
-        </v3-cell-item>
-        <v3-cell-item type="checkbox">
-            <span slot="left">多选二</span>
-            <input slot="right" type="checkbox" value="C" v-model="checkList"/>            
-        </v3-cell-item>
-        <v3-cell-item type="checkbox">
-            <span slot="left">多选二</span>
-            <input slot="right" type="checkbox" value="D" v-model="checkList"/>            
-        </v3-cell-item>
-    </div>
 
     <div id="a2" style="padding:10px 0">
         <v3-cell-item type="radio" href = "xxxx">
@@ -180,8 +142,18 @@ export default {
     },
     toast(){
         console.log('按钮点击');
+        // this.$toast({
+        //     imgType: 'icon',//icon || img
+        //     imgUrl: '&#xe61a;',
+        //     iconColor: 'orange',
+        //     content: '付款失败',
+        //     contentColor: '#fff',
+        //     time: '500000',
+        //     bgColor:'rgba(0,0,0,.6)'
+        // });
         this.$toast({
-            content:'提示信息'
+            content:'没有任何图标的提示',
+            time: '5000'
         });
     },
     abc(val){

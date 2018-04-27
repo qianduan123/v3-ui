@@ -46,7 +46,8 @@
         .v3-box {
             width: 80%;
             max-width: 400px;
-            top: 200px;
+            top: 38.2%;
+            transform: translateY(-50%);
             position: absolute;
             left: 0;
             right: 0;

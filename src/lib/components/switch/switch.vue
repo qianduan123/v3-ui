@@ -76,7 +76,7 @@ export default {
                 user-select: none;
                 transition: all .2s ease-in-out;
                 display: inline-block;
-                &:before {
+                &:after {
                     content: "";
                     width: 20px;
                     height: 20px;
@@ -90,7 +90,7 @@ export default {
                     transition: left .2s ease-in-out,all .2s ease-in-out;
                 }
                 &:active {
-                    &:before {
+                    &:after {
                         transform-origin: 0;
                         width: 25px;
                     }
@@ -106,11 +106,11 @@ export default {
             }
             &:checked + i{
                 background: #4cd864;                
-                &:before {
+                &:after {
                     left: 25px;
                 }
                 &:active {
-                    &:before {
+                    &:after {
                         transform: translateX(-5px);
                         width: 25px;
                     }

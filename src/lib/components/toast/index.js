@@ -1,63 +1,56 @@
 import Vue from 'vue';
 import ToastComponent from './toast.vue';
-//合并对象函数，这个方法是会改变，第一个参数的值的
-function merge (target) {
-  for (let i = 1, j = arguments.length; i < j; i++) {
-    let source = arguments[i] || {};
-    for (let prop in source) {
-      if (source.hasOwnProperty (prop)) {
-        let value = source[prop];
-        if (value !== undefined) {
-          target[prop] = value;
-        }
-      }
-    }
-  }
-  return target;
-}
-let instance;
+import * as v3Common from '../v3'
+
+
 //extend 是构造一个组件的语法器.传入参数，返回一个组件
 let ToastConstructor = Vue.extend (ToastComponent);
-let getInstance = () => {
-  return new ToastConstructor ({
-    el: document.createElement ('div'),
-  });
-};
 
-let initInstance = () => {
-  instance = getInstance();
-  document.body.appendChild (instance.$el);
-};
 ToastConstructor.prototype.closeToast = function () {
   const el = instance.$el;
   el.parentNode && el.parentNode.removeChild (el);
-
-  pageScroll.unlock ();
-
+  v3Common.pageScroll.unlock ();
   typeof this.callback === 'function' && this.callback ();
 };
 
+const instance = new ToastConstructor ({
+  el: document.createElement ('div'),
+});
+
+let initInstance = () => {
+  document.body.appendChild (instance.$el);
+  v3Common.pageScroll.lock ();
+};
+
+/**
+ * @description 
+ * @author zhaojingqi
+ * @param {String} options.imgType 图片类型 icon/img
+ * @param {String} options.imgUrl 1、imgType为icon时imgUrl必须是v3UI提供的icon 2、imgType为img时imgUrl为图片绝对地址
+ * @param {String} options.bgColor toast背景图颜色 默认默认#999
+ * @param {String} options.iconColor icon图标的颜色 默认#ccc
+ * @param {String} options.content toast文字内容 必传
+ * @param {String} options.contentColor  toast文字内容颜色 默认#ccc
+ * @param {String Number} options.time  toast显示时间 默认3秒
+ * 
+ */
 let Toast = (options = {}) => {
-  //初始化
-  initInstance ();
-  // 将单个 confirm instance 的配置合并到默认值（instance.$data，就是main.vue里面的data）中
-  merge (instance.$data, options);
+  instance.imgType = options.imgType;
+  instance.imgUrl = options.imgUrl;  
+  instance.bgColor = options.bgColor;  
+  instance.iconColor = options.iconColor;
+  instance.content = options.content;
+  instance.contentColor = options.contentColor;
+  instance.time = ~~options.time || 3000;
+ 
+  initInstance();
+  console.log(instance.show);
   instance.show = true;
   let timer = setTimeout(() => {
     clearTimeout (timer);
-    instance.close();
-  },3000)
+    instance.show = false;
+    // instance.closeToast();
 
-  //返回Promise
-  // return new Promise ((resolve, reject) => {
-  //   console.log(instance);
-  //   instance.show = true;
-  //   instance.close = () => {
-  //     //先执行instance.close（main.vue里面的close函数）
-  //     close ();
-  //     //再执行自定义函数
-  //     resolve ('ok');
-  //   };
-  // });
+  },instance.time)
 };
 export default Toast;
