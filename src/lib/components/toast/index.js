@@ -25,17 +25,14 @@ let initInstance = () => {
 /**
  * @description 
  * @author zhaojingqi
- * @param {String} options.imgType 图片类型 icon/img
- * @param {String} options.imgUrl 1、imgType为icon时imgUrl必须是v3UI提供的icon 2、imgType为img时imgUrl为图片绝对地址
- * @param {String} options.bgColor toast背景图颜色 默认默认#999
- * @param {String} options.iconColor icon图标的颜色 默认#ccc
- * @param {String} options.content toast文字内容 必传
- * @param {String} options.contentColor  toast文字内容颜色 默认#ccc
- * @param {String Number} options.time  toast显示时间 默认3秒
- * 
+ * @param  {String} options.imgUrl 1、v3UI提供的icon图标 2、图片:http或https开头的绝对地址
+ * @param  {String} options.bgColor toast背景图颜色 默认默认#999
+ * @param  {String} options.iconColor icon图标的颜色 默认#ccc
+ * @param  {String} options.content toast文字内容 必传
+ * @param  {String} options.contentColor  toast文字内容颜色 默认#ccc
+ * @param  {String Number} options.time  toast显示时间 默认3秒
  */
 let Toast = (options = {}) => {
-  instance.imgType = options.imgType;
   instance.imgUrl = options.imgUrl;  
   instance.bgColor = options.bgColor;  
   instance.iconColor = options.iconColor;
@@ -44,13 +41,11 @@ let Toast = (options = {}) => {
   instance.time = ~~options.time || 3000;
  
   initInstance();
-  console.log(instance.show);
+  // console.log(instance.show);
   instance.show = true;
   let timer = setTimeout(() => {
     clearTimeout (timer);
     instance.show = false;
-    // instance.closeToast();
-
   },instance.time)
 };
 export default Toast;

@@ -6,20 +6,28 @@
             id="run-aaaa"
             :style-object = proporty
             @click = alert>
-            按钮
+            Alert组件
         </v3-button>
+        <hr>
         <v3-button
             class="aaa"
             id="run-aaaa"
             :style-object = proporty
             @click = toast>
-            按钮
+            Toast组件
+        </v3-button>
+        <hr>
+        <v3-button
+            class="aaa"
+            id="run-aaaa"
+            @click = getAddress>
+            地址选择器
         </v3-button>
     </div>
-  
   <br>
-  
+    
     <div>已选中：{{checkList}}</div>
+    <!-- 多选 -->
     <div id="a1" style="padding:10px 0;">
         <v3-cell-item type="checkbox">
             <img  slot="icon" src="http://static.ydcss.com/ydui/img/logo.png">			  
@@ -58,7 +66,7 @@
             <input slot="right" type="checkbox" value="D" v-model="checkList"/>            
         </v3-cell-item>
     </div>
-
+    <!-- 单选 -->
     <div id="a2" style="padding:10px 0">
         <v3-cell-item type="radio" href = "xxxx">
             <img  slot="icon" src="http://static.ydcss.com/ydui/img/logo.png">
@@ -70,7 +78,7 @@
             <input slot="right" type="radio" value="MeiM" v-model="picked"/>            
         </v3-cell-item>
     </div>
-
+    <!-- 开关 -->
     <div id="a3" style="padding:10px 0">
         <v3-cell-item href = "xxxx">
             <img  slot="icon" src="http://static.ydcss.com/ydui/img/logo.png">
@@ -89,10 +97,7 @@
             </v3-switch>
         </v3-cell-item>
     </div>
-
-    <div style="padding:10px 0">
-        
-    </div>
+    <v3-address ref="addressList"></v3-address>
   </div>
 </template>
 
@@ -125,7 +130,8 @@ export default {
       checkList:[],
       switch1: false,
       chengeCon1: false,
-      chengeCon2: true
+      chengeCon2: true,
+      show1: false
     }
   },
   methods: {
@@ -143,7 +149,6 @@ export default {
     toast(){
         console.log('按钮点击');
         // this.$toast({
-        //     imgType: 'icon',//icon || img
         //     imgUrl: '&#xe61a;',
         //     iconColor: 'orange',
         //     content: '付款失败',
@@ -152,8 +157,9 @@ export default {
         //     bgColor:'rgba(0,0,0,.6)'
         // });
         this.$toast({
-            content:'没有任何图标的提示',
-            time: '5000'
+            imgUrl: '&#xe61a;',
+            content:'充值失败，请稍后重试',
+            time: '3000'
         });
     },
     abc(val){
@@ -167,6 +173,7 @@ export default {
         this.chengeCon2 = val;
         console.log(val);
     },
+    // 关键点提示插件
     drive(){
         const driver = new Driver({
             animate: true,  // Animate while changing highlighted element
@@ -216,6 +223,9 @@ export default {
         ]);
         driver.start();
         localStorage.setItem('drive','true');
+    },
+    getAddress () {
+        this.$refs['addressList'].showAddress();
     }
   },
   mounted(){

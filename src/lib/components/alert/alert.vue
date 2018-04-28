@@ -104,7 +104,7 @@
             transition: transform .2s;
         }
     }
-    .v3-leave-active {
+    .v3-leave {
         opacity: 0;
     }
 </style>
