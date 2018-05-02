@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import AlertComponent from './alert.vue';
+import {pageScroll} from '../v3-units'
 //合并对象函数，这个方法是会改变，第一个参数的值的
 function merge (target) {
   for (let i = 1, j = arguments.length; i < j; i++) {
@@ -27,6 +28,7 @@ let getInstance = () => {
 let initInstance = () => {
   instance = getInstance();
   document.body.appendChild (instance.$el);
+  pageScroll.lock();
 };
 
 let Alert = (options = {}) => {
@@ -36,16 +38,16 @@ let Alert = (options = {}) => {
   merge (instance.$data, options);
   instance.show = true;
 
-  //返回Promise
-  // return new Promise ((resolve, reject) => {
-  //   console.log(instance);
-  //   instance.show = true;
-  //   instance.close = () => {
-  //     //先执行instance.close（main.vue里面的close函数）
-  //     close ();
-  //     //再执行自定义函数
-  //     resolve ('ok');
-  //   };
-  // });
+  // 返回Promise
+  return new Promise ((resolve, reject) => {
+    instance.show = true;
+    let close = instance.close;
+    instance.close = () => {
+      //先执行instance.close（main.vue里面的close函数）
+      close ();
+      pageScroll.unlock();
+      // resolve ('ok');
+    };
+  });
 };
 export default Alert;

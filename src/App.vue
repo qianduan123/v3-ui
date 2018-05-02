@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="a0" style="padding: 10px 30px;">
+    <div id="a0">
         <v3-button
             class="aaa"
             id="run-aaaa"
@@ -8,7 +8,7 @@
             @click = alert>
             Alert组件
         </v3-button>
-        <hr>
+        <hr/>
         <v3-button
             class="aaa"
             id="run-aaaa"
@@ -16,13 +16,18 @@
             @click = toast>
             Toast组件
         </v3-button>
-        <hr>
+        <hr/>
         <v3-button
             class="aaa"
             id="run-aaaa"
             @click = getAddress>
             地址选择器
         </v3-button>
+        <hr/>
+        <v3-cell-item v-for="(v, key) in addressList" :key="key">
+            <span slot="left">{{v.name}}</span>
+            <span slot="right">{{v.value}}</span>
+        </v3-cell-item>
     </div>
   <br>
     
@@ -97,7 +102,7 @@
             </v3-switch>
         </v3-cell-item>
     </div>
-    <v3-address ref="addressList"></v3-address>
+    <v3-address ref="addressList" @getData = getAddressData></v3-address>
   </div>
 </template>
 
@@ -131,7 +136,8 @@ export default {
       switch1: false,
       chengeCon1: false,
       chengeCon2: true,
-      show1: false
+      show1: false,
+      addressList: []
     }
   },
   methods: {
@@ -144,6 +150,12 @@ export default {
                 2、复投匹配债权差异<br>
                 3、主动退出变现等`,
             submitText: '我知道了'
+        })
+        .then(()=>{
+            this.name='守候'
+            this.$alert({
+                content: this.name
+            })
         });
     },
     toast(){
@@ -226,6 +238,13 @@ export default {
     },
     getAddress () {
         this.$refs['addressList'].showAddress();
+    },
+    getAddressData (v) {
+        this.$toast({
+            content:'选择地址成功',
+            time: '3000'
+        });
+        this.addressList = v;
     }
   },
   mounted(){

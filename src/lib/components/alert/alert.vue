@@ -7,7 +7,7 @@
                     <div class="v3-content" v-html="content"></div>
                 </div>
                 <div class="v3-box-buttons">
-                    <span class="v3-btn-success" @click.stop="success">{{submitText}}</span>
+                    <span class="v3-btn-success" @click.stop="close">{{submitText}}</span>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
         mounted () {
         },
         methods: {
-            success () {
+            close () {
                 this.show = false;
             }
         }

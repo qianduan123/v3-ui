@@ -14,7 +14,7 @@
     </transition>
 </template>
 <script>
-    import {isColor} from '../v3';
+    import {isColor} from '../v3-units';
     export default {
         name:'v3-toast',
         props:{

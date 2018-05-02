@@ -1,17 +1,10 @@
 import Vue from 'vue';
 import ToastComponent from './toast.vue';
-import * as v3Common from '../v3'
+import * as v3Common from '../v3-units'
 
 
 //extend 是构造一个组件的语法器.传入参数，返回一个组件
 let ToastConstructor = Vue.extend (ToastComponent);
-
-ToastConstructor.prototype.closeToast = function () {
-  const el = instance.$el;
-  el.parentNode && el.parentNode.removeChild (el);
-  v3Common.pageScroll.unlock ();
-  typeof this.callback === 'function' && this.callback ();
-};
 
 const instance = new ToastConstructor ({
   el: document.createElement ('div'),
@@ -19,7 +12,7 @@ const instance = new ToastConstructor ({
 
 let initInstance = () => {
   document.body.appendChild (instance.$el);
-  v3Common.pageScroll.lock ();
+  v3Common.pageScroll.lock();
 };
 
 /**
@@ -41,10 +34,10 @@ let Toast = (options = {}) => {
   instance.time = ~~options.time || 3000;
  
   initInstance();
-  // console.log(instance.show);
   instance.show = true;
   let timer = setTimeout(() => {
     clearTimeout (timer);
+    v3Common.pageScroll.unlock ();
     instance.show = false;
   },instance.time)
 };

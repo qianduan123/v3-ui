@@ -3,17 +3,20 @@ const pageScroll = (function () {
     e.preventDefault ();
     e.stopPropagation ();
   };
-  let islock = false;
 
+  let islock = false;
+  var supportsPassive = false;
+  
+  
   return {
     lock (el) {
       if (islock) return;
       islock = true;
-      (el || document).addEventListener ('touchmove', fn);
+      (el || document).addEventListener ('touchmove', fn, { passive: false } );
     },
     unlock (el) {
       islock = false;
-      (el || document).removeEventListener ('touchmove', fn);
+      (el || document).removeEventListener ('touchmove', fn, { passive: false } );
     },
   };
 }) ();
